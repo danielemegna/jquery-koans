@@ -13,7 +13,7 @@ describe("About Utilities", function() {
       }
     });
     
-    expect(result).toEqual(__);
+    expect(result).toEqual(2);
   });
   
   it("should iterate an object literal with $.each", function() {
@@ -26,7 +26,8 @@ describe("About Utilities", function() {
       }
     });
     
-    expect(actualValue).toEqual(__);
+    expect(actualValue).toEqual("Swedish Chef");
+    expect(object.name).toEqual("Swedish Chef");
   });
   
   it("should merge two objects with $.extend", function() {    
@@ -35,7 +36,8 @@ describe("About Utilities", function() {
     
     var result = $.extend({}, object1, object2);
     
-    expect(result.lastName).toEqual(__);
+    expect(result.color).toEqual("red");
+    expect(result.lastName).toEqual("woodpecker");
   });
   
   it("should filter arrays with $.grep", function() {
@@ -45,7 +47,7 @@ describe("About Utilities", function() {
       return value > 5;
     });
     
-    expect(array).toEqual(__);
+    expect(array).toEqual([6, 7, 8]);
   });
   
   it("should find elements in array with $.inArray", function() {
@@ -57,9 +59,14 @@ describe("About Utilities", function() {
     var boogieMonsterInArrayResult = $.inArray("BoogieMonster", array);
     var notFoundInArrayResult = $.inArray(98765, array);
     
-    expect(pieInArrayResult).toEqual(__);
-    expect(boogieMonsterInArrayResult).toEqual(__);
-    expect(notFoundInArrayResult).toEqual(__);
+    expect(pieInArrayResult != -1).toBe(true);
+    expect(pieInArrayResult).toEqual(0);
+
+    expect(boogieMonsterInArrayResult != -1).toEqual(true);
+    expect(boogieMonsterInArrayResult).toEqual(3);
+
+    expect(notFoundInArrayResult != -1).toEqual(false);
+    expect(notFoundInArrayResult).toEqual(-1);
   });
   
   it("should determine types using $.type", function() {
@@ -69,8 +76,8 @@ describe("About Utilities", function() {
     var type1 = $.type(num);
     var type2 = $.type(arr);
     
-    expect(type1).toEqual(__);
-    expect(type2).toEqual(__);
+    expect(type1).toEqual('number');
+    expect(type2).toEqual('array');
   });
 
   it("should test for array type using $.isArray", function() {
@@ -80,16 +87,16 @@ describe("About Utilities", function() {
     var isArrayForArray = $.isArray(array);
     var isArrayForObject = $.isArray(object);
     
-    expect(isArrayForArray).toEqual(__);
-    expect(isArrayForObject).toEqual(__);
+    expect(isArrayForArray).toEqual(true);
+    expect(isArrayForObject).toEqual(false);
   });
   
   it("should check for empty objects using $.isEmptyObject", function() {
     var isEmpty = $.isEmptyObject({});
     var isNotEmpty = $.isEmptyObject({name: "name", value: "value"});
     
-    expect(isEmpty).toEqual(__);
-    expect(isNotEmpty).toEqual(__);    
+    expect(isEmpty).toEqual(true);
+    expect(isNotEmpty).toEqual(false);    
   });
   
   it("should detect function types using $.isFunction", function() {
@@ -104,8 +111,8 @@ describe("About Utilities", function() {
     var isFunction1 = $.isFunction(object.name);
     var isFunction2 = $.isFunction(object.getWeight);
     
-    expect(isFunction1).toEqual(__);
-    expect(isFunction2).toEqual(__);
+    expect(isFunction1).toEqual(false);
+    expect(isFunction2).toEqual(true);
   });
   
   it("should perform translations on each array element returning a new array using $.map", function() {
@@ -115,8 +122,8 @@ describe("About Utilities", function() {
       return element.toUpperCase();
     });
     
-    expect(mapped).toEqual(__);
-    expect($.type(mapped)).toEqual(__);
+    expect(mapped).toEqual(["A", "B", "C", "D"]);
+    expect($.type(mapped)).toEqual('array');
   });
   
   it("should parse json using $.parseJSON", function() {
@@ -124,14 +131,15 @@ describe("About Utilities", function() {
     
     var parsedJsonObject = $.parseJSON(jsonString);
     
-    expect(parsedJsonObject.name).toEqual(__);
-    expect(parsedJsonObject.age).toEqual(__);
+    expect(parsedJsonObject.name).toEqual("animal");
+    expect(parsedJsonObject.age).toEqual(2);
+    expect(parsedJsonObject.unknown).toEqual(undefined);
   });
   
   it("should trim strings using $.trim", function() {
     var string = "   Internet Explorer does not have a native implementation of trim, so this jquery method is handy     ";
     
     var trimmed = $.trim(string);
-    expect(trimmed).toEqual(__);
+    expect(trimmed).toEqual("Internet Explorer does not have a native implementation of trim, so this jquery method is handy");
   });
 });
